@@ -1,0 +1,23 @@
+@int val = 0;
+#int acc = 0;
+
+main := t {int old = acc; acc = children.get(0).val;} e2 {result.val = children.get(1).val; acc = old;};
+
+e2 := {result.val = acc;}
+ | PLUS t {int old = acc; acc = acc + children.get(1).val;} e2 {result.val = children.get(2).val; acc = old;}
+ | MINUS t {int old = acc; acc = acc - children.get(1).val;} e2 {result.val = children.get(2).val; acc = old;};
+t := f {int old = acc; acc = children.get(0).val;} t2 {result.val = children.get(1).val; acc = old;};
+t2 := {result.val = acc;}
+ | MUL f {int old = acc; acc = acc * children.get(1).val;} t2 {result.val = children.get(2).val; acc = old;}
+ | DIV f {int old = acc; acc = acc / children.get(1).val;} t2 {result.val = children.get(2).val; acc = old;}
+ | MOD f {int old = acc; acc = acc % children.get(1).val;} t2 {result.val = children.get(2).val; acc = old;};
+f := LPAR main RPAR {result.val = children.get(1).val;} | NUM {result.val = Integer.parseInt(children.get(0).getName());};
+
+LPAR = '(';
+RPAR = ')';
+PLUS = '+';
+MINUS = '-';
+DIV = '/';
+MUL = '*';
+MOD = '%';
+NUM = "[0-9]+";

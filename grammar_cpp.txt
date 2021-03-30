@@ -1,0 +1,12 @@
+main := {System.out.println("Main EPS");} | desc SEMICOLON main {System.out.println("Main");};
+desc := type var next {System.out.println("Desc");};
+next := {System.out.println("Next EPS");} | COMMA var next {System.out.println("Next");};
+type := ID {System.out.println(children.get(0).getName());};
+var := ASTERISK var {System.out.println("Asterisk var");} | var2 {System.out.println(children.get(0).getName());};
+var2 := ID {System.out.println(children.get(0).getName());} | AMPERSAND ID {System.out.println("Ampersand " + children.get(1).getName());};
+
+ID = "[a-zA-Z]+";
+SEMICOLON = ';';
+COMMA = ',';
+ASTERISK = '*';
+AMPERSAND = '&';
