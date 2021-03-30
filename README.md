@@ -24,3 +24,8 @@ After running `parse` method, it will return `MainNode` object representing pars
 * `grammar_cpp.txt` - very simplified grammar for C and C++ variable declaration (no arrays, templates, function pointers, etc.). It prints current non-terminal and children information after parsing (`{}` blocks can be removed to disable printing).
 
 Generated code can be found in `examples` directory.
+
+#### Known issues:
+* First of all, it's difficult to generate efficient lexer. In this app, the generated lexer uses naive strategy, consuming input by 1 symbol and running check on all rules, which result in huge complexity. 
+
+* This app does not attempt to fix the grammar to make it LL(1) (i.e. removing left recursion). 
